@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>INPUT DATA KE SPREAD SHEET</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /*  */
+    body {
+      background-color: #0c0a0a;
+    }
+    #form-container {
+      width: 330px;
+      margin: 0 auto;
+      margin-top: 230px;
+      background-color: #f1f1f7;
+      border: 2px solid #da0808;
+      border-radius: 10px;
+      padding: 20px;
+    }
+    #form-container h2 {
+      text-align: center;
+      color: #1E90FF;
+    }
+    #form-container input[type="text"], #form-container input[type="date"], #form-container input[type="tel"] {
+      width: 60%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 2px solid #f1d0d0;
+      border-radius: 5px;
+    }
+    #form-container .presensi-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    #form-container .presensi-buttons button {
+      flex-grow: 1;
+      background-color: #1E90FF;
+      color: #FFFFFF;
+      border: none;
+      border-radius: 10%;
+      padding: 9px;
+      margin-right: 5px;
+      cursor: pointer;
+    }
+    #form-container .presensi-buttons button:last-child {
+      margin-right: 0;
+    }
+    #form-container .presensi-buttons .selected {
+      background-color: #4CAF50;
+    }
+    #form-container input[type="submit"] {
+      background-color: #1E90FF;
+      color: #FFFFFF;
+      border: none;
+      border-radius: 5px;
+      margin-top: 10px;
+      padding: 10px;
+      width: 100%;
+      cursor: pointer;
+    }
+    #form-container input[type="submit"]:hover {
+      background-color: #004B8D;
+    }
+    #footer {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 12px;
+      color: #f7f1f1;
+    }
+
+    .message-container {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .message {
+      font-size: 18px;
+      font-weight: bold;
+      color: #FF0000;
+      background-color: #000000;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    td {
+      vertical-align: top;
+    }
+
+    td:first-child {
+      width: 40%;
+      text-align: left;
+    }
+    
+    /* Modal style */
+    .modal {
+      display: none; /* Hide the modal by default */
+      position: fixed; /* Fixed position */
+      z-index: 1; /* Ensure it stays on top */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgb(0,0,0); /* Fallback color */
+      background-color: rgba(0,0,0,0.4); /* Black with opacity */
+    }
+    
+    /* Modal content */
+    .modal-content {
+      background-color: #fefefe;
+      margin: 15% auto; /* 15% from the top and centered */
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%; /* Could be more or less, depending on screen size */
+      border-radius: 5px;
+    }
+    
+    /* Close button */
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+    
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="form-container">
+    <h2>PRESENSI KARISTA</h2>
+    <div class="message-container">
+      <p class="message" id="message">⚠️ Maaf, formulir ini hanya dapat diakses pada hari Kamis pukul 15:30 ⚠️</p>
+    </div>
+    <form action="https://script.google.com/macros/s/AKfycbxy93VKiMDbOdS8VLqp7P2uNuvMOUX0fVVQAJK9kphZYGnVSpcreroXprNeEmJF-kWZeg/exec" method="post" id="presensiForm">
+
+        <table>
+          <tr>
+            <td><label for="nama">Nama:</label></td>
+            <td><input type="text" id="nama" name="nama" required></td>
+          </tr>
+          <tr>
+            <td><label for="kelas">Jurusan dan Kelas:</label></td>
+            <td><input type="text" id="kelas" name="kelas" required></td>
+          </tr>
+          <tr>
+            <td><label for="presensi">Presensi:</label></td>
+            <td>
+              <div class="presensi-buttons">
+                <button type="button" id="presentBtn" onclick="setPresensi('Present')">Present</button>
+                <button type="button" id="absentBtn" onclick="setPresensi('Absent')">Absent</button>
+                <button type="button" id="izinBtn" onclick="showReasonModal()">Izin</button>
+              </div>
+              <input type="hidden" id="presensi" name="presensi" required>
+            </td>
+          </tr>
+          <tr>
+            <td><label for="no_hp">Nomor HP:</label></td>
+            <td><input type="tel" id="no_hp" name="no_hp" pattern="[0-9]{10,12}" required></td>
+          </tr>
+        </table>
+
+        <input type="submit" value="Kirim Presensi" id="submitBtn">
+        
+    </form>
+  </div>
+
+  <div id="footer">
+    © KARISTA STEMBAYO
+  </div>
+
+  <!-- Modal -->
+  <div id="reasonModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="close" onclick="hideReasonModal()">&times;</span>
+      <h3>Alasan Izin</h3>
+      <textarea id="izinAlasan" rows="4" cols="50"></textarea>
+      <button type="button" onclick="submitIzin()">Submit</button>
+    </div>
+  </div>
+
+  <script>
+    window.onload = function() {
+      var currentTime = new Date();
+      var targetTime = new Date();
+      targetTime.setHours(10, 30, 0); // Mengatur waktu target menjadi 15:30
+
+      // Membandingkan hari saat ini dengan Kamis (4) dan waktu saat ini dengan waktu target
+      if (currentTime.getDay() !== 1 || currentTime.getTime() < targetTime.getTime()) {
+        // Jika hari bukan Kamis atau waktu saat ini sebelum waktu target,
+        // menonaktifkan formulir dan menampilkan pesan
+        document.getElementById("presensiForm").style.pointerEvents = "none";
+        document.getElementById("submitBtn").disabled = true;
+        document.getElementById("message").style.display = "block";
+      } else {
+        // Jika hari adalah Kamis dan waktu saat ini setelah waktu target,
+        // menghilangkan pesan
+        document.getElementById("message").style.display = "none";
+      }
+    };
+
+    function setPresensi(presensi) {
+      var presentBtn = document.getElementById("presentBtn");
+      var absentBtn = document.getElementById("absentBtn");
+      var izinBtn = document.getElementById("izinBtn");
+
+      if (presensi === "Present") {
+        document.getElementById("presensi").value = "Present";
+        presentBtn.classList.add("selected");
+        absentBtn.classList.remove("selected");
+        izinBtn.classList.remove("selected");
+      } else if (presensi === "Absent") {
+        document.getElementById("presensi").value = "Absent";
+        presentBtn.classList.remove("selected");
+        absentBtn.classList.add("selected");
+       izinBtn.classList.remove("selected");
+      } else if (presensi === "Izin") {
+        showReasonModal();
+      } else {
+        document.getElementById("presensi").value = "";
+        presentBtn.classList.remove("selected");
+        absentBtn.classList.remove("selected");
+        izinBtn.classList.remove("selected");
+      }
+    }
+
+    function showReasonModal() {
+      var modal = document.getElementById("reasonModal");
+      modal.style.display = "block";
+    }
+
+    function hideReasonModal() {
+      var modal = document.getElementById("reasonModal");
+      modal.style.display = "none";
+    }
+
+    function submitIzin() {
+      var reason = document.getElementById("izinAlasan").value;
+      document.getElementById("presensi").value = "Izin: " + reason;
+      hideReasonModal();
+      var izinBtn = document.getElementById("izinBtn");
+      izinBtn.classList.add("selected");
+    }
+  </script>
+</body>
+</html>
