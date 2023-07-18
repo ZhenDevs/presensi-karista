@@ -193,9 +193,9 @@
     window.onload = function() {
       var currentTime = new Date();
       var targetTime = new Date();
-      targetTime.setHours(15, 30, 0);
+      targetTime.setHours(8, 30, 0);
 
-      if (currentTime.getDay() !== 4 || currentTime.getTime() < targetTime.getTime()) {
+      if (currentTime.getDay() !== 2 || currentTime.getTime() < targetTime.getTime()) {
         document.getElementById("presensiForm").style.pointerEvents = "none";
         document.getElementById("submitBtn").disabled = true;
         document.getElementById("message").style.display = "block";
