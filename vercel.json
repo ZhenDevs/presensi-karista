@@ -2,7 +2,7 @@
   "routes": [
     {
       "src": "/presensi",
-      "dest": "/presensi/index.html"
+      "dest": "/presensi/presensi.html"
     },
     {
       "src": "/presensi/*",
