@@ -221,6 +221,8 @@
   width: 0;
   height: 0;
 }
+body.checked {
+  background-color: black;
   </style>
 </head>
 
@@ -346,6 +348,18 @@
       var izinBtn = document.getElementById("izinBtn");
       izinBtn.classList.add("selected");
     }
+
+const switchInput = document.querySelector('.ui-switch input');
+  switchInput.addEventListener('click', handleSwitchClick);
+
+  function handleSwitchClick() {
+    const body = document.querySelector('body');
+    if (switchInput.checked) {
+      body.classList.add('checked');
+    } else {
+      body.classList.remove('checked');
+    }
+  }
   </script>
 </body>
 </html>
