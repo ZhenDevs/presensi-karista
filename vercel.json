@@ -1,7 +1,16 @@
 {
-  "rewrites": [
-    { "source": "/presensi/:path*.html", "destination": "/halaman/:path*" },
-    { "source": "/:path*.html", "destination": "/:path*" }
+  "routes": [
+    {
+      "src": "/presensi",
+      "dest": "/presensi/index.html"
+    },
+    {
+      "src": "/presensi/*",
+      "dest": "/presensi/:splat"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/$1.html"
+    }
   ]
 }
-￼Enter
