@@ -221,8 +221,9 @@
   width: 0;
   height: 0;
 }
-body.checked {
+body.dark {
   background-color: black;
+}
   </style>
 </head>
 
@@ -272,8 +273,8 @@ body.checked {
     © KARISTA STEMBAYO
   </div>
   
-  <label class="ui-switch">
-  <input type="checkbox">
+<label class="ui-switch">
+  <input type="checkbox" id="theme-switch">
   <div class="slider">
     <div class="circle"></div>
   </div>
@@ -349,17 +350,27 @@ body.checked {
       izinBtn.classList.add("selected");
     }
 
-const switchInput = document.querySelector('.ui-switch input');
-  switchInput.addEventListener('click', handleSwitchClick);
+const switchInput = document.getElementById('theme-switch');
+  switchInput.addEventListener('change', toggleDarkMode);
 
-  function handleSwitchClick() {
+  function toggleDarkMode() {
     const body = document.querySelector('body');
     if (switchInput.checked) {
-      body.classList.add('checked');
+      body.classList.add('dark');
+      localStorage.setItem('darkMode', 'enabled');
     } else {
-      body.classList.remove('checked');
+      body.classList.remove('dark');
+      localStorage.setItem('darkMode', 'disabled');
     }
   }
+  window.addEventListener('load', () => {
+    const darkModePreference = localStorage.getItem('darkMode');
+    if (darkModePreference === 'enabled') {
+      switchInput.checked = true;
+      toggleDarkMode();
+    }
+  })
+  
   </script>
 </body>
 </html>
