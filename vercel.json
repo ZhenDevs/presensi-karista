@@ -1,0 +1,7 @@
+{
+  "rewrites": [
+    { "source": "/presensi/:path*.html", "destination": "/halaman/:path*" },
+    { "source": "/:path*.html", "destination": "/:path*" }
+  ]
+}
+￼Enter
