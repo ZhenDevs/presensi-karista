@@ -327,10 +327,10 @@ body.dark input[type="tel"] {
       var currentTime = new Date();
       var targetTimeStart = new Date();
       var targetTimeEnd = new Date();
-      targetTimeStart.setHours(15, 30, 0);
+      targetTimeStart.setHours(11, 30, 0);
       targetTimeEnd.setHours(17, 0, 0);
 
-      if (currentTime.getDay() !== 4 || currentTime < targetTimeStart || currentTime > targetTimeEnd) {
+      if (currentTime.getDay() !== 6 || currentTime < targetTimeStart || currentTime > targetTimeEnd) {
         document.getElementById("presensiForm").style.pointerEvents = "none";
         document.getElementById("submitBtn").disabled = true;
         document.getElementById("message").style.display = "block";
