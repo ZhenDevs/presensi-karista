@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Verifikasi Token</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            max-width: 400px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            width: 95%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        button:active {
+            background-color: #004b9a;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Masukkan Token:</h1>
+        <input type="text" id="tokenInput">
+        <button onclick="verifikasiToken()">Submit</button>
+    </div>
+
+    <script>
+        function verifikasiToken() {
+            const tokenBenar = 'karista';
+            const inputToken = document.getElementById('tokenInput').value;
+
+            if (inputToken === tokenBenar) {
+                window.location.href = 'presensi.html';
+            } else {
+                alert('Token salah! Coba lagi.');
+            }
+        }
+    </script>
+</body>
+</html>
