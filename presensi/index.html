@@ -1,50 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
-    <title>Verifikasi Token</title>
+   <head>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-@import url(https://fonts.googleapis.com/css?family=Lobster);
-@import url(https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css);
-
+      <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f0f0f0;
             margin: 0 auto;
-            background-image: url(https://subtlepatterns.com/patterns/bedge_grunge.png);
-            background-position: initial initial;
-            background-repeat: initial initial;
-            
         }
-        
-        .alert .inner {
-       display: block;
-  padding: 6px;
-  margin: 6px;
-  border-radius: 3px;
-  border: 1px solid rgb(180,180,180);
-  background-color: rgb(212,212,212);
-}
-.alert .close {
-  float: right;
-  margin: 3px 12px 0px 0px;
-  cursor: pointer;
-}
-
-.alert .inner,.alert .close {
-  color: rgb(88,88,88);
-}
-
-.alert input {
-  display: none;
-}
-
-.alert input:checked ~ * {
-  animation-name: dismiss,hide;
-  animation-duration: 300ms;
-  animation-iteration-count: 1;
-  animation-timing-function: ease;
-  animation-fill-mode: forwards;
 
         .container {
             max-width: 400px;
@@ -59,6 +22,26 @@
         h1 {
             text-align: center;
             margin-bottom: 20px;
+        }
+
+        .error-message {
+            background-color: #f44336;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            display: none;
+        }
+
+        .success-message {
+            background-color: #4CAF50;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            display: none;
         }
 
         input[type="text"] {
@@ -89,25 +72,36 @@
             background-color: #004b9a;
         }
     </style>
-</head>
-<body>
-    <div class="container">
-        <h1>Masukkan Token:</h1>
-        <input type="text" id="tokenInput">
-        <button onclick="verifikasiToken()">Submit</button>
-    </div>
-
-    <script>
+   </head>
+   <body>
+      <div class="container">
+         <h1>Masukkan Token:</h1>
+         <div class="error-message" id="errorMessage">
+            TOKEN SALAH
+         </div>
+         <div class="success-message" id="successMessage">
+            TOKEN BENAR
+         </div> <input type="text" id="tokenInput"> <button onclick="verifikasiToken()">Submit</button>
+      </div>
+      <script>
         function verifikasiToken() {
             const tokenBenar = 'karista';
             const inputToken = document.getElementById('tokenInput').value;
+            const errorMessage = document.getElementById('errorMessage');
+            const successMessage = document.getElementById('successMessage');
 
             if (inputToken === tokenBenar) {
-                window.location.href = 'presensi.html';
+                successMessage.style.display = 'block';
+                errorMessage.style.display = 'none';
+                setTimeout(function() {
+                    successMessage.style.display = 'none';
+                    window.location.href = 'presentasi.html';
+                }, 3000);
             } else {
-                alert('Token salah! Coba lagi.');
+                errorMessage.style.display = 'block';
+                successMessage.style.display = 'none';
             }
         }
     </script>
-</body>
+   </body>
 </html>
