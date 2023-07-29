@@ -4,12 +4,47 @@
     <title>Verifikasi Token</title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
+@import url(https://fonts.googleapis.com/css?family=Lobster);
+@import url(https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css);
+
         body {
             font-family: Arial, sans-serif;
             background-color: #f0f0f0;
             margin: 0 auto;
+            background-image: url(https://subtlepatterns.com/patterns/bedge_grunge.png);
+            background-position: initial initial;
+            background-repeat: initial initial;
             
         }
+        
+        .alert .inner {
+  display: block;
+  padding: 6px;
+  margin: 6px;
+  border-radius: 3px;
+  border: 1px solid rgb(180,180,180);
+  background-color: rgb(212,212,212);
+}
+.alert .close {
+  float: right;
+  margin: 3px 12px 0px 0px;
+  cursor: pointer;
+}
+
+.alert .inner,.alert .close {
+  color: rgb(88,88,88);
+}
+
+.alert input {
+  display: none;
+}
+
+.alert input:checked ~ * {
+  animation-name: dismiss,hide;
+  animation-duration: 300ms;
+  animation-iteration-count: 1;
+  animation-timing-function: ease;
+  animation-fill-mode: forwards;
 
         .container {
             max-width: 400px;
